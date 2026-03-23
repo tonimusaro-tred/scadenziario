@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scadenziario Spinel Caffè</title>
+<title>Scadenziario Spinel Caffè</title><!-- v4.1 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICA8cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9IjExMiIgZmlsbD0iIzE4NUZBNSIvPgogIDxyZWN0IHg9IjE0MCIgeT0iMTAwIiB3aWR0aD0iMjMyIiBoZWlnaHQ9IjMxMiIgcng9IjIwIiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC4xNSIvPgogIDxyZWN0IHg9IjE1MiIgeT0iMTEyIiB3aWR0aD0iMjA4IiBoZWlnaHQ9IjI4OCIgcng9IjE2IiBmaWxsPSJ3aGl0ZSIvPgogIDwhLS0gQ2FsZW5kYXIgY2xpcCBhdCB0b3AgLS0+CiAgPHJlY3QgeD0iMTk2IiB5PSI5NiIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQ4IiByeD0iOCIgZmlsbD0iIzBDNDQ3QyIvPgogIDxyZWN0IHg9IjI3NiIgeT0iOTYiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0OCIgcng9IjgiIGZpbGw9IiMwQzQ0N0MiLz4KICA8IS0tIExpbmVzIC0tPgogIDxyZWN0IHg9IjE4NCIgeT0iMTkyIiB3aWR0aD0iMTQ0IiBoZWlnaHQ9IjEyIiByeD0iNiIgZmlsbD0iI0U2RjFGQiIvPgogIDxyZWN0IHg9IjE4NCIgeT0iMjIwIiB3aWR0aD0iMTA0IiBoZWlnaHQ9IjEwIiByeD0iNSIgZmlsbD0iI0I1RDRGNCIvPgogIDxyZWN0IHg9IjE4NCIgeT0iMjUyIiB3aWR0aD0iMTQ0IiBoZWlnaHQ9IjEyIiByeD0iNiIgZmlsbD0iI0U2RjFGQiIvPgogIDxyZWN0IHg9IjE4NCIgeT0iMjgwIiB3aWR0aD0iODgiIGhlaWdodD0iMTAiIHJ4PSI1IiBmaWxsPSIjQjVENEY0Ii8+CiAgPHJlY3QgeD0iMTg0IiB5PSIzMTIiIHdpZHRoPSIxNDQiIGhlaWdodD0iMTIiIHJ4PSI2IiBmaWxsPSIjRTZGMUZCIi8+CiAgPHJlY3QgeD0iMTg0IiB5PSIzNDAiIHdpZHRoPSIxMjAiIGhlaWdodD0iMTAiIHJ4PSI1IiBmaWxsPSIjQjVENEY0Ii8+CiAgPCEtLSBVcmdlbmN5IGRvdCAtLT4KICA8Y2lyY2xlIGN4PSIxNjgiIGN5PSIxOTgiIHI9IjgiIGZpbGw9IiNFMjRCNEEiLz4KICA8Y2lyY2xlIGN4PSIxNjgiIGN5PSIyNTgiIHI9IjgiIGZpbGw9IiNFRjlGMjciLz4KICA8Y2lyY2xlIGN4PSIxNjgiIGN5PSIzMTgiIHI9IjgiIGZpbGw9IiM2Mzk5MjIiLz4KPC9zdmc+">
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICA8cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9IjExMiIgZmlsbD0iIzE4NUZBNSIvPgogIDxyZWN0IHg9IjE0MCIgeT0iMTAwIiB3aWR0aD0iMjMyIiBoZWlnaHQ9IjMxMiIgcng9IjIwIiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC4xNSIvPgogIDxyZWN0IHg9IjE1MiIgeT0iMTEyIiB3aWR0aD0iMjA4IiBoZWlnaHQ9IjI4OCIgcng9IjE2IiBmaWxsPSJ3aGl0ZSIvPgogIDwhLS0gQ2FsZW5kYXIgY2xpcCBhdCB0b3AgLS0+CiAgPHJlY3QgeD0iMTk2IiB5PSI5NiIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQ4IiByeD0iOCIgZmlsbD0iIzBDNDQ3QyIvPgogIDxyZWN0IHg9IjI3NiIgeT0iOTYiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0OCIgcng9IjgiIGZpbGw9IiMwQzQ0N0MiLz4KICA8IS0tIExpbmVzIC0tPgogIDxyZWN0IHg9IjE4NCIgeT0iMTkyIiB3aWR0aD0iMTQ0IiBoZWlnaHQ9IjEyIiByeD0iNiIgZmlsbD0iI0U2RjFGQiIvPgogIDxyZWN0IHg9IjE4NCIgeT0iMjIwIiB3aWR0aD0iMTA0IiBoZWlnaHQ9IjEwIiByeD0iNSIgZmlsbD0iI0I1RDRGNCIvPgogIDxyZWN0IHg9IjE4NCIgeT0iMjUyIiB3aWR0aD0iMTQ0IiBoZWlnaHQ9IjEyIiByeD0iNiIgZmlsbD0iI0U2RjFGQiIvPgogIDxyZWN0IHg9IjE4NCIgeT0iMjgwIiB3aWR0aD0iODgiIGhlaWdodD0iMTAiIHJ4PSI1IiBmaWxsPSIjQjVENEY0Ii8+CiAgPHJlY3QgeD0iMTg0IiB5PSIzMTIiIHdpZHRoPSIxNDQiIGhlaWdodD0iMTIiIHJ4PSI2IiBmaWxsPSIjRTZGMUZCIi8+CiAgPHJlY3QgeD0iMTg0IiB5PSIzNDAiIHdpZHRoPSIxMjAiIGhlaWdodD0iMTAiIHJ4PSI1IiBmaWxsPSIjQjVENEY0Ii8+CiAgPCEtLSBVcmdlbmN5IGRvdCAtLT4KICA8Y2lyY2xlIGN4PSIxNjgiIGN5PSIxOTgiIHI9IjgiIGZpbGw9IiNFMjRCNEEiLz4KICA8Y2lyY2xlIGN4PSIxNjgiIGN5PSIyNTgiIHI9IjgiIGZpbGw9IiNFRjlGMjciLz4KICA8Y2lyY2xlIGN4PSIxNjgiIGN5PSIzMTgiIHI9IjgiIGZpbGw9IiM2Mzk5MjIiLz4KPC9zdmc+">
@@ -121,13 +121,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <script>
 const SHEET_URL='https://script.google.com/macros/s/AKfycbzIpO-ar4fnwFmpHFMOivy66Xm05_LmHPnGBjG3KvXktA6I2qEFkbs9d-vSfDEH9qvv/exec';
 // JSONP - bypassa CORS senza proxy
-function jsonpCall(url, callback){
+function jsonpCall(url){
   return new Promise(function(resolve, reject){
-    var id='cb_'+Date.now()+'_'+Math.random().toString(36).slice(2);
-    window[id]=function(data){ delete window[id]; s.remove(); resolve(data); };
+    var id='cb'+Date.now();
+    var t=setTimeout(function(){ 
+      delete window[id]; 
+      if(s.parentNode)s.parentNode.removeChild(s); 
+      reject(new Error('timeout')); 
+    }, 10000);
+    window[id]=function(data){ 
+      clearTimeout(t);
+      delete window[id]; 
+      if(s.parentNode)s.parentNode.removeChild(s); 
+      resolve(data); 
+    };
+    var sep=url.indexOf('?')>=0?'&':'?';
     var s=document.createElement('script');
-    s.src=url+'&callback='+id;
-    s.onerror=function(){ delete window[id]; s.remove(); reject(new Error('JSONP error')); };
+    s.src=url+sep+'callback='+id+'&_t='+Date.now();
+    s.onerror=function(){ 
+      clearTimeout(t);
+      delete window[id]; 
+      if(s.parentNode)s.parentNode.removeChild(s);
+      reject(new Error('JSONP load error')); 
+    };
     document.head.appendChild(s);
   });
 }
