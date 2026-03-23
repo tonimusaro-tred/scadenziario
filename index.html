@@ -424,6 +424,25 @@ window.updateLink=function(i,k,v){state.editItem.allegati[i][k]=v;};
 window.openCalendar=function(item){if(!item)return;var sc=new Date(item.scadenza);var ds=sc.getFullYear()+''+String(sc.getMonth()+1).padStart(2,'0')+''+String(sc.getDate()).padStart(2,'0');window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(item.titolo)+'&dates='+ds+'/'+ds,'_blank');};
 window.openGmail=function(item){if(!item)return;var sub=encodeURIComponent('Promemoria: '+item.titolo);var body=encodeURIComponent('Scadenza: '+formatDate(item.scadenza)+'\nEnte: '+(item.ente||'')+'\n'+(item.importo||''));window.open('https://mail.google.com/mail/?view=cm&su='+sub+'&body='+body,'_blank');};
 window.syncNow=function(){sheetsGet();};
+window.importaExcel=async function(){
+  if(!confirm('Vuoi importare le 13 scadenze dal file Excel? Verranno aggiunte a quelle esistenti.'))return;
+  showToast('Importazione in corso...');
+  var imported=0;
+  for(var i=0;i<PRELOADED_ITEMS.length;i++){
+    var item=PRELOADED_ITEMS[i];
+    // Controlla se esiste già
+    var exists=state.sharedItems.find(function(s){return s.id===item.id;});
+    if(!exists){
+      state.sharedItems.unshift(item);
+      await sheetsSave(item);
+      imported++;
+    }
+  }
+  cacheShared();
+  render();
+  showToast('Importate '+imported+' scadenze su Google Sheets!');
+  setTimeout(function(){sheetsGet();},2000);
+};
 
 function render(){
   var root=document.getElementById('root');
@@ -536,7 +555,7 @@ function render(){
   +'<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">'
   +'<div class="user-chip"><div class="user-avatar">'+initials(state.username)+'</div>'+state.username+'<button class="act-btn btn-sm" onclick="changeUser()" style="margin-left:4px">Cambia</button></div>'
   +'<div class="export-menu"><button class="btn btn-green btn-sm" onclick="event.stopPropagation();toggleExportMenu()">Esporta Excel</button>'+(state.showExportMenu?'<div class="export-dropdown"><button class="export-opt" onclick="exportExcel(\'tutti\')"><div>Tutte le scadenze</div><div class="export-opt-desc">'+allItems().length+' elementi</div></button><button class="export-opt" onclick="exportExcel(\'filtrati\')"><div>Vista corrente</div><div class="export-opt-desc">'+filteredItems().length+' elementi</div></button></div>':'')+'</div>'
-  +'<button class="btn btn-primary btn-sm" onclick="openEdit(null)">+ Nuova scadenza</button>'
+  +'<button class="btn btn-sm" onclick="importaExcel()" style="background:#854F0B;color:#fff;border-color:#854F0B">Importa Excel</button>'+'<button class="btn btn-primary btn-sm" onclick="openEdit(null)">+ Nuova scadenza</button>'
   +'</div></div>'
   +'<div class="banner" style="background:'+bsColor+';border:0.5px solid '+bsBorder+';color:'+bsText+'">'+(bs==='loading'?'<div class="spinner"></div>':'<div class="status-dot" style="background:'+bsText+'"></div>')+'<span style="flex:1">'+bsMsg+'</span>'+(bs==='ok'||bs==='error'?'<button style="background:'+(bs==='ok'?'#3B6D11':'#A32D2D')+';color:#fff;border-radius:8px" onclick="syncNow()">'+(bs==='ok'?'Sincronizza':'Riprova')+'</button>':'')+'</div>'
   +'<div class="stats"><div class="stat"><div class="stat-label">Totale</div><div class="stat-value">'+stats.totale+'</div></div><div class="stat"><div class="stat-label">Urgenti (≤3 gg)</div><div class="stat-value" style="color:#A32D2D">'+stats.urgenti+'</div></div><div class="stat"><div class="stat-label">Questa settimana</div><div class="stat-value" style="color:#854F0B">'+stats.settimana+'</div></div><div class="stat"><div class="stat-label">Scaduti</div><div class="stat-value" style="color:#6b6b6b">'+stats.scaduti+'</div></div></div>'
