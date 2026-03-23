@@ -120,13 +120,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div class="container" id="root"></div>
 <script>
 const SHEET_URL='https://script.google.com/macros/s/AKfycbzIpO-ar4fnwFmpHFMOivy66Xm05_LmHPnGBjG3KvXktA6I2qEFkbs9d-vSfDEH9qvv/exec';
-function proxyUrl(url){
-  return 'https://api.allorigins.win/get?url='+encodeURIComponent(url);
+// JSONP - bypassa CORS senza proxy
+function jsonpCall(url, callback){
+  return new Promise(function(resolve, reject){
+    var id='cb_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+    window[id]=function(data){ delete window[id]; s.remove(); resolve(data); };
+    var s=document.createElement('script');
+    s.src=url+'&callback='+id;
+    s.onerror=function(){ delete window[id]; s.remove(); reject(new Error('JSONP error')); };
+    document.head.appendChild(s);
+  });
 }
 async function proxyFetch(url){
-  const r=await fetch(proxyUrl(url));
-  const d=await r.json();
-  return JSON.parse(d.contents);
+  return jsonpCall(url);
 }
 const KEY_USER='scad_username_v1';
 const KEY_PERS='scad_personal_v1'; // legacy cache only, not used for storage anymore
